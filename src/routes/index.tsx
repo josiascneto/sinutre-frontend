@@ -9,30 +9,20 @@ import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ProtectedRoute } from './ProtectRoute';
 import { DietFoodPage } from '@/pages/DietFood';
+import { Settings } from '@/pages/Settings';
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
-
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-
-        <Route
-          element={
+        <Route path="/login" element={<LoginPage />}/>
+        <Route element={
             <ProtectedRoute>
               <AppLayout />
             </ProtectedRoute>
           }
         >
-          <Route
-            path="/foods"
-            element={<DietFoodPage />}
-        
-          />
-
+        <Route path="/foods" element={<DietFoodPage />}/>
         </Route>
 
         <Route
@@ -42,15 +32,19 @@ export function Router() {
             </ProtectedRoute>
           }
         >
-          <Route
-            path="/"
-            element={
-              <DashboardPage drawerId="main-drawer" />
-            }
-          />
-
+        <Route path="/" element={ <DashboardPage drawerId="main-drawer" />}/>
         </Route>
 
+        <Route
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/" element={<DashboardPage drawerId="main-drawer" />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
       </Routes>
     </BrowserRouter>
   );

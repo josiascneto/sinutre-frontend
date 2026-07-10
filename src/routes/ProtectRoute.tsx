@@ -23,19 +23,15 @@ export function ProtectedRoute({
       () => consumeTokenFromUrl() ?? getToken(),
     );
 
-
   useEffect(() => {
       const fromUrl = consumeTokenFromUrl();
       if (fromUrl) setLocalToken(fromUrl);
     }, []);
-    
   if (!token) {
     return <Navigate to="/login" replace />;
   }
-
   if (loading) {
     return <div>Carregando...</div>;
   }
-
   return <>{children}</>;
 }

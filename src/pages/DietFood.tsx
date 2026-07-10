@@ -28,11 +28,7 @@ export function DietFoodPage() {
 
   return (
     <div className="w-full max-w-[1200px] mx-auto">
-      <SimpleHeader
-        title="Dieta"
-        subtitle="Gerencie seus alimentos"
-      />
-
+      <SimpleHeader title="Dieta" subtitle="Gerencie seus alimentos"/>
       {loading ? (
         <p>Carregando...</p>
       ) : (
@@ -43,10 +39,7 @@ export function DietFoodPage() {
               className="card bg-base-100 shadow-sm"
             >
               <div className="card-body">
-                <h2 className="card-title">
-                  {food.name}
-                </h2>
-
+                <h2 className="card-title">{food.name}</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                   <span>
                     🔥 {food.caloriesPer100g} kcal
@@ -82,7 +75,6 @@ export function DietFoodPage() {
       >
         <Plus size={24} weight="bold" />
       </button>
-
       <AddFoodModal
         modalId={MODAL_ID}
         onCreated={loadFoods}

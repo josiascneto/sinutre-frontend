@@ -23,7 +23,6 @@ export function ProtectedRoute({
       () => consumeTokenFromUrl() ?? getToken(),
     );
 
-
   useEffect(() => {
       const fromUrl = consumeTokenFromUrl();
       if (fromUrl) setLocalToken(fromUrl);
