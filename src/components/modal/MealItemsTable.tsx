@@ -37,9 +37,9 @@ export function MealItemsTable({ items, onRemove }: MealItemsTableProps) {
                 <button
                   type="button"
                   onClick={() => onRemove?.(item)}
-                  className="btn btn-ghost btn-xs"
+                  className="btn btn-error btn-xs"
                 >
-                  remover
+                  REMOVER
                 </button>
               </td>
             </tr>

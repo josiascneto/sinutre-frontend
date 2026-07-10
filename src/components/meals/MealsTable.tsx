@@ -19,7 +19,7 @@ export function MealsTable({ meals, onActionClick }: MealsTableProps) {
               <th>Data</th>
               <th>Categoria</th>
               <th>Total de Calorias</th>
-              <th className="text-center">Ação</th>
+              <th className="text-center">Remover</th>
             </tr>
           </thead>
           <tbody>
