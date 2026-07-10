@@ -128,8 +128,10 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
             <button className="btn" onClick={() => setSelectedMeal(null)}>
               Cancelar
             </button>
-            <button className="btn btn-error" onClick={() => {console.log(selectedMeal.id);
-                setSelectedMeal(null);
+            <button className="btn btn-error"onClick={async () => {
+              await api.delete(`/meals/${selectedMeal.id}`);
+              await loadMeals();
+              setSelectedMeal(null);
               }}
             >
               Remover
