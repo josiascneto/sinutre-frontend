@@ -25,12 +25,14 @@ export function Settings() {
     <div className="w-full max-w-[1200px] mx-auto">
         <SimpleHeader title="Configurações" subtitle="Gerenciar configurações da página"/>
         <p>Trocar tema da página</p>
-        <button onClick={toggleTheme} className="btn btn-primary">
-            {theme === "forest" ? "☀️ Light Mode": "🌙 Dark Mode"}
-        </button>
-        <button onClick={handleLogout} className="btn btn-error mt-6">
-            Logout
-        </button>
+        <div className="flex flex-col gap-4 mt-4">
+            <button onClick={toggleTheme} className="btn btn-primary rounded-lg">
+                {theme === "forest" ? "☀️ Light Mode": "🌙 Dark Mode"}
+            </button>
+            <button onClick={handleLogout} className="btn btn-error mt-6">
+                Logout
+            </button>
+        </div>
     </div>
     );
 }
