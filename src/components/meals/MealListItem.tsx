@@ -26,12 +26,7 @@ export function MealListItem({ meal, onActionClick }: MealListItemProps) {
         <span className="badge badge-primary badge-outline badge-sm">
           {meal.totals.calories} kcal
         </span>
-        <button
-          type="button"
-          onClick={() => onActionClick?.(meal)}
-          className="btn btn-ghost btn-sm btn-square"
-          aria-label="Mais ações"
-        >
+        <button type="button" onClick={() => onActionClick?.(meal)} className="btn btn-ghost btn-sm btn-square" aria-label="Mais ações">
           <DotsThreeVertical size={18} />
         </button>
       </div>

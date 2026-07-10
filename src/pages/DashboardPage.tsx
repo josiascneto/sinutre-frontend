@@ -26,6 +26,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
   const modal = useMealModal();
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
 
   async function loadMeals() {
     try {
@@ -112,10 +113,31 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
           <TotalMealsCard summary={mealsSummary} />
           <AddMealCard onSelectCategory={modal.openWith} />
         </div>
-        <MealsTable meals={meals} />
-        <MealsList meals={meals} />
+          <MealsTable
+          meals={meals}
+          onActionClick={setSelectedMeal}/>
+          <MealsList meals={meals} />
       </div>
       <MealFab onSelectCategory={modal.openWith} />
+      {selectedMeal && (
+      <dialog className="modal modal-open">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Remover refeição</h3>
+          <p className="py-4">Deseja realmente remover a refeição<strong> {selectedMeal.name}</strong>?</p>
+          <div className="modal-action">
+            <button className="btn" onClick={() => setSelectedMeal(null)}>
+              Cancelar
+            </button>
+            <button className="btn btn-error" onClick={() => {console.log(selectedMeal.id);
+                setSelectedMeal(null);
+              }}
+            >
+              Remover
+            </button>
+          </div>
+        </div>
+      </dialog>
+    )}
       <AddMealModal
         open={modal.open}
         typeMeal={modal.selectedCategory}
