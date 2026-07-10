@@ -3,7 +3,6 @@ import { Plus } from '@phosphor-icons/react';
 
 import { SimpleHeader } from '@/components/layout/SimpleHeader';
 import { AddFoodModal } from '@/components/modal/AddFoodModal';
-
 import { getFoods } from '@/services/foodService';
 import type { Food } from '@/types/food';
 
