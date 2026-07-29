@@ -4,6 +4,8 @@ import { CaloriesChart } from "@/components/stats/CaloriesChart";
 import { WeightChart } from "@/components/stats/WeightChart";
 import { CategoryChart } from "@/components/stats/CategoryChart";
 import { SimpleHeader } from "@/components/layout/SimpleHeader";
+import { BMICard } from "@/components/stats/BMICard";
+import { AverageCaloriesCard } from "@/components/stats/AverageCaloriesCard";
 
 export function StatsPage() {
 return (
@@ -21,6 +23,8 @@ return (
             <CaloriesChart />
             <WeightChart />
             <CategoryChart />
+            <BMICard />
+            <AverageCaloriesCard />
         </div>
     </div>
 );

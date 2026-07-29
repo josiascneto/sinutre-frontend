@@ -28,6 +28,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
   const [loading, setLoading] = useState(true);
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
   const [caloriesGoal, setCaloriesGoal] = useState(1000);
+  
 
   async function loadMeals() {
     try {
@@ -37,6 +38,18 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
       setLoading(false);
     }
   }
+
+  async function loadUserHealth() {
+  try {
+    const response = await api.get("/user-health");
+
+    if (response.data?.targetDietDaily) {
+      setCaloriesGoal(response.data.targetDietDaily);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   async function loadCaloriesGoal() {
   try {
@@ -52,6 +65,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
 
   useEffect(() => {
   loadMeals();
+  loadUserHealth();
   loadCaloriesGoal();
 }, []);
 
