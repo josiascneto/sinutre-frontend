@@ -27,6 +27,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+  const [caloriesGoal, setCaloriesGoal] = useState(1000);
 
   async function loadMeals() {
     try {
@@ -37,9 +38,22 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
     }
   }
 
+  async function loadCaloriesGoal() {
+  try {
+    const response = await api.get("/user-health");
+
+    if (response.data?.targetDietDaily) {
+      setCaloriesGoal(response.data.targetDietDaily);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
   useEffect(() => {
-    loadMeals();
-  }, []);
+  loadMeals();
+  loadCaloriesGoal();
+}, []);
 
   const mealsSummary = useMemo(() => {
     const today = new Date();
@@ -66,7 +80,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
       thisMonth: monthCount,
       today: todayCount,
     };
-  }, [meals]);
+  }, [meals, caloriesGoal]);
 
   const macroSummary = useMemo(() => {
     const today = new Date();
@@ -90,10 +104,10 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         proteins: 0,
         fats: 0,
         calories: 0,
-        caloriesGoal: 1000, //ainda não veio do banco de dados
+        caloriesGoal, 
       },
     );
-  }, [meals]);
+  }, [meals, caloriesGoal]);
 
 
   if (loading) {
