@@ -37,7 +37,7 @@ export function MacroStat({
   return (
     <div className={wrapperClasses}>
       <div className="stat-value text-2xl lg:text-4xl mb-1">
-        {value}
+        {value.toFixed(2)}
         {goal !== undefined ? (
           <span className={`text-sm lg:text-xl font-normal ${valueMutedClass}`}>
             {' '}/ {goal}

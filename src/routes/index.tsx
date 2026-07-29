@@ -10,7 +10,7 @@ import { DashboardPage } from '@/pages/DashboardPage';
 import { ProtectedRoute } from './ProtectRoute';
 import { DietFoodPage } from '@/pages/DietFood';
 import { Settings } from '@/pages/Settings';
-
+import { StatsPage } from '@/pages/StatsPage';
 export function Router() {
   return (
     <BrowserRouter>
@@ -44,6 +44,7 @@ export function Router() {
       >
         <Route path="/" element={<DashboardPage drawerId="main-drawer" />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/stats" element={<StatsPage />} />
       </Route>
       </Routes>
     </BrowserRouter>
