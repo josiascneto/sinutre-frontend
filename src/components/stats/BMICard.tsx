@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
-interface Weight {
-    id: number;
-    weight: number;
-    height: number;
-}
-
 export function BMICard() {
     const [bmi, setBmi] = useState<number | null>(null);
 
