@@ -15,6 +15,7 @@ interface Meal {
     totals: {
     calories: number;
     
+    };
 }
 
 interface ChartData {
