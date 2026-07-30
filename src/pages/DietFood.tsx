@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { Plus } from "@phosphor-icons/react";
-
+import { Plus, Pencil } from "@phosphor-icons/react";
 import { SimpleHeader } from "@/components/layout/SimpleHeader";
 import { AddFoodModal } from "@/components/modal/AddFoodModal";
-import {
-  getFoods,
-  deleteFood,
-} from "@/services/foodService";
+import { getFoods, deleteFood } from "@/services/foodService";
 import type { Food } from "@/types/food";
 
-const MODAL_ID = "create-food-modal";
+const MODAL_ID = "food-modal";
 
 export function DietFoodPage() {
   const [foods, setFoods] = useState<Food[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedFood, setSelectedFood] =
+    useState<Food | null>(null);
+  const [editingFood, setEditingFood] =
     useState<Food | null>(null);
 
   async function loadFoods() {
@@ -36,19 +34,41 @@ export function DietFoodPage() {
     await loadFoods();
   }
 
+  function openCreateModal() {
+    setEditingFood(null);
+
+    (
+      document.getElementById(
+        MODAL_ID
+      ) as HTMLDialogElement
+    )?.showModal();
+  }
+
+  function openEditModal(food: Food) {
+    setEditingFood(food);
+
+    (
+      document.getElementById(
+        MODAL_ID
+      ) as HTMLDialogElement
+    )?.showModal();
+  }
+
   useEffect(() => {
     loadFoods();
   }, []);
 
   return (
     <div className="w-full max-w-[1200px] mx-auto">
+
       <SimpleHeader
         title="Dieta"
         subtitle="Gerencie seus alimentos"
       />
-
       {loading ? (
-        <p>Carregando...</p>
+        <p className="mt-6">
+          Carregando...
+        </p>
       ) : (
         <div className="grid gap-4 mt-6">
           {foods.map((food) => (
@@ -60,26 +80,30 @@ export function DietFoodPage() {
                 <h2 className="card-title">
                   {food.name}
                 </h2>
-
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                   <span>
                     🔥 {food.caloriesPer100g} kcal
                   </span>
-
                   <span>
                     🍞 {food.carbsPer100g} g
                   </span>
-
                   <span>
                     🍗 {food.proteinPer100g} g
                   </span>
-
                   <span>
                     🥑 {food.fatPer100g} g
                   </span>
                 </div>
-
-                <div className="card-actions justify-end mt-4">
+                <div className="card-actions justify-end mt-4 gap-2">
+                  <button
+                    className="btn btn-warning btn-sm"
+                    onClick={() =>
+                      openEditModal(food)
+                    }
+                  >
+                    <Pencil size={16}/>
+                    Editar
+                  </button>
                   <button
                     className="btn btn-error btn-sm"
                     onClick={() =>
@@ -94,36 +118,39 @@ export function DietFoodPage() {
           ))}
         </div>
       )}
-
       <button
-        className="btn btn-primary btn-circle btn-lg fixed bottom-6 right-6 shadow-lg z-50"
-        onClick={() =>
-          (
-            document.getElementById(
-              MODAL_ID
-            ) as HTMLDialogElement
-          )?.showModal()
-        }
+        className="
+          btn 
+          btn-primary 
+          btn-circle 
+          btn-lg 
+          fixed 
+          bottom-6 
+          right-6 
+          shadow-lg 
+          z-[999]
+        "
+        onClick={openCreateModal}
       >
-        <Plus size={24} weight="bold" />
+        <Plus
+          size={28}
+          weight="bold"
+        />
       </button>
 
       {selectedFood && (
+
         <dialog className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">
               Excluir alimento
             </h3>
-
             <p className="py-4">
-              Deseja realmente excluir
+              Deseja realmente excluir{" "}
               <strong>
-                {" "}
                 {selectedFood.name}
-              </strong>
-              ?
+              </strong>?
             </p>
-
             <div className="modal-action">
               <button
                 className="btn"
@@ -133,7 +160,6 @@ export function DietFoodPage() {
               >
                 Cancelar
               </button>
-
               <button
                 className="btn btn-error"
                 onClick={handleDelete}
@@ -147,6 +173,7 @@ export function DietFoodPage() {
 
       <AddFoodModal
         modalId={MODAL_ID}
+        food={editingFood}
         onCreated={loadFoods}
       />
     </div>

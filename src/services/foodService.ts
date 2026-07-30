@@ -17,23 +17,6 @@ export async function createFood(
   return response.data;
 }
 
-export async function searchFoods(
-  search: string,
-) {
-  const response = await api.get('/foods', {
-    params: {
-      search,
-    },
-  });
-
-  return response.data;
-
-}
-
-export async function deleteFood(id: number) {
-  await api.delete(`/foods/${id}`);
-}
-
 export async function updateFood(
   id: number,
   food: Omit<Food, "id">,
@@ -44,4 +27,20 @@ export async function updateFood(
   );
 
   return response.data;
+}
+
+export async function searchFoods(
+  search: string,
+) {
+  const response = await api.get('/foods', {
+    params: {
+      search,
+    },
+  });
+
+  return response.data;
+}
+
+export async function deleteFood(id: number) {
+  await api.delete(`/foods/${id}`);
 }
